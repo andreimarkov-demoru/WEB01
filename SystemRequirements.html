@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB01 — Техническая документация</title>
+
+<style>
+:root{
+    --bg:#0b1220;
+    --panel:#0f1b2d;
+    --card:#111f35;
+    --text:#e5e7eb;
+    --muted:#9ca3af;
+    --accent:#7c3aed;
+    --accent2:#38bdf8;
+    --border:rgba(255,255,255,0.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    color:var(--text);
+}
+  .body {background:linear-gradient(180deg,var(--bg),#070b14);}
+
+/* HERO */
+.hero{
+    padding:70px 40px;
+    background:
+        radial-gradient(circle at top right,rgba(124,58,237,0.25),transparent 40%),
+        radial-gradient(circle at left,rgba(56,189,248,0.15),transparent 35%);
+    border-bottom:1px solid var(--border);
+}
+
+.hero-inner{max-width:1300px;margin:0 auto;}
+
+.label{
+    display:inline-block;
+    padding:8px 14px;
+    background:rgba(124,58,237,0.15);
+    color:#c4b5fd;
+    border:1px solid rgba(124,58,237,0.3);
+    border-radius:40px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:44px;
+    margin-bottom:14px;
+}
+
+.hero p{
+    max-width:900px;
+    color:var(--muted);
+    font-size:18px;
+    line-height:1.7;
+}
+
+/* LAYOUT (3 COLUMNS) */
+.layout{
+    max-width:1350px;
+    margin:0 auto;
+    padding:40px;
+    display:grid;
+    grid-template-columns:260px 1fr 280px;
+    gap:24px;
+}
+
+/* SIDEBAR LEFT */
+.sidebar{
+    position:sticky;
+    top:30px;
+    height:fit-content;
+}
+
+.nav{
+    background:rgba(17,31,53,0.8);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    backdrop-filter:blur(10px);
+}
+
+.nav h3{
+    margin-bottom:14px;
+    font-size:14px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+}
+
+.nav button{
+    width:100%;
+    text-align:left;
+    padding:12px 14px;
+    margin-bottom:8px;
+    border-radius:12px;
+    border:1px solid transparent;
+    background:transparent;
+    color:var(--muted);
+    cursor:pointer;
+    transition:.2s;
+}
+
+.nav button:hover{
+    background:rgba(124,58,237,0.1);
+    color:#fff;
+}
+
+.nav button.active{
+    background:rgba(124,58,237,0.25);
+    color:#fff;
+    border:1px solid rgba(124,58,237,0.4);
+}
+
+/* CONTENT */
+.content{
+    display:flex;
+    flex-direction:column;
+    gap:20px;
+}
+
+.block{
+    display:none;
+    background:rgba(17,31,53,0.8);
+    border:1px solid var(--border);
+    border-radius:22px;
+    padding:32px;
+    backdrop-filter:blur(12px);
+}
+
+.block.active{display:block;}
+
+.block h2{
+    font-size:26px;
+    margin-bottom:14px;
+    color:#fff;
+}
+
+.block p{
+    color:var(--muted);
+    line-height:1.8;
+    margin-bottom:14px;
+}
+
+/* LISTS */
+ul{
+    padding-left:18px;
+    margin:10px 0 20px;
+}
+
+li{
+    margin-bottom:8px;
+    color:var(--muted);
+    line-height:1.6;
+}
+
+/* IMAGE */
+.image{
+    margin-top:16px;
+    border-radius:16px;
+    overflow:hidden;
+    border:1px solid var(--border);
+}
+
+.image img{
+    width:100%;
+    height:320px;
+    object-fit:cover;
+}
+
+/* DIAGRAM */
+pre{
+    background:#050914;
+    padding:18px;
+    border-radius:14px;
+    color:#93c5fd;
+    overflow:auto;
+    border:1px solid var(--border);
+    margin-top:10px;
+}
+
+/* CALLOUT */
+.callout{
+    margin-top:18px;
+    padding:18px;
+    border-left:4px solid var(--accent2);
+    background:rgba(56,189,248,0.08);
+    border-radius:14px;
+    color:var(--muted);
+}
+
+/* RIGHT SIDEBAR */
+.rightbar{
+    position:sticky;
+    top:30px;
+    height:fit-content;
+}
+
+.right-card{
+    background:rgba(17,31,53,0.8);
+    border:1px solid var(--border);
+    border-radius:18px;
+    padding:18px;
+    backdrop-filter:blur(10px);
+    margin-bottom:14px;
+}
+
+.right-card h4{
+    font-size:13px;
+    color:var(--muted);
+    text-transform:uppercase;
+    letter-spacing:1px;
+    margin-bottom:10px;
+}
+
+.metric{
+    padding:10px 12px;
+    background:rgba(124,58,237,0.12);
+    border:1px solid rgba(124,58,237,0.25);
+    border-radius:12px;
+    margin-bottom:8px;
+    font-size:13px;
+    color:#e5e7eb;
+}
+
+.tag{
+    display:inline-block;
+    padding:6px 10px;
+    border-radius:999px;
+    background:rgba(56,189,248,0.12);
+    border:1px solid rgba(56,189,248,0.25);
+    color:#bae6fd;
+    font-size:12px;
+    margin:4px 4px 0 0;
+}
+
+/* MOBILE */
+@media(max-width:1100px){
+    .layout{grid-template-columns:1fr;}
+    .sidebar,.rightbar{position:relative;}
+}
+</style>
+</head>
+
+<body>
+<div class="body">
+<div class="hero">
+    <div class="hero-inner">
+        <div class="label">WEB01 • ТЕХНИЧЕСКАЯ СПЕЦИФИКАЦИЯ</div>
+        <h1>Требования к корпоративной системе</h1>
+        <p>
+            Документ фиксирует функциональные и нефункциональные требования к платформе WEB01.
+            Используется командами разработки, архитектуры, тестирования и DevOps.
+        </p>
+    </div>
+</div>
+
+<div class="layout">
+
+<!-- LEFT -->
+<div class="sidebar">
+<div class="nav">
+<h3>Разделы</h3>
+
+<button class="active" onclick="show('structure',this)">Структура сайта</button>
+<button onclick="show('form',this)">Формы</button>
+<button onclick="show('perf',this)">Производительность</button>
+<button onclick="show('security',this)">Безопасность</button>
+<button onclick="show('adaptive',this)">Адаптивность</button>
+<button onclick="show('integration',this)">Интеграции</button>
+<button onclick="show('nonfunc',this)">Нефункциональные</button>
+
+</div>
+</div>
+
+<!-- CENTER -->
+<div class="content">
+
+<div class="block active" id="structure">
+<h2>1. Структура сайта</h2>
+
+<p>
+Сайт должен обеспечивать логичную и предсказуемую навигацию, позволяющую пользователю
+получить доступ к ключевым разделам без лишних переходов.
+</p>
+
+<ul>
+<li>Главная страница с обзором сервисов</li>
+<li>Раздел «О компании»</li>
+<li>Каталог услуг</li>
+<li>Блог и новости</li>
+<li>Контакты</li>
+<li>FAQ</li>
+</ul>
+
+<p>
+Навигация должна быть доступна на всех страницах и обеспечивать быстрый доступ к ключевым разделам.
+</p>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/3183150/pexels-photo-3183150.jpeg">
+</div>
+</div>
+
+<div class="block" id="form">
+<h2>2. Форма обратной связи</h2>
+
+<p>
+Форма является основным каналом взаимодействия пользователей с системой.
+</p>
+
+<ul>
+<li>Проверка обязательных полей</li>
+<li>Валидация email и телефона</li>
+<li>Антиспам защита</li>
+<li>Уведомления пользователю</li>
+<li>Передача данных в backend</li>
+</ul>
+
+<div class="callout">
+Все обращения сохраняются в централизованной системе обработки заявок.
+</div>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/669615/pexels-photo-669615.jpeg">
+</div>
+</div>
+
+<div class="block" id="perf">
+<h2>3. Производительность</h2>
+
+<p>
+Система должна обеспечивать стабильную работу при высокой нагрузке.
+</p>
+
+<ul>
+<li>Загрузка ≤ 3 секунд</li>
+<li>Lazy loading изображений</li>
+<li>Минификация ресурсов</li>
+<li>Кэширование</li>
+<li>Оптимизация медиа</li>
+</ul>
+
+<div class="callout">
+Цель — стабильный UX без деградации интерфейса при пиковых нагрузках.
+</div>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg">
+</div>
+</div>
+
+<div class="block" id="security">
+<h2>4. Безопасность</h2>
+
+<p>
+Система должна соответствовать современным стандартам защиты данных.
+</p>
+
+<ul>
+<li>HTTPS</li>
+<li>XSS защита</li>
+<li>CSRF токены</li>
+<li>Шифрование данных</li>
+<li>Контроль доступа</li>
+</ul>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg">
+</div>
+</div>
+
+<div class="block" id="adaptive">
+<h2>5. Адаптивность</h2>
+
+<ul>
+<li>Desktop</li>
+<li>Планшеты</li>
+<li>Мобильные устройства</li>
+<li>Responsive layout</li>
+<li>Кроссбраузерность</li>
+</ul>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/5082561/pexels-photo-5082561.jpeg">
+</div>
+</div>
+
+<div class="block" id="integration">
+<h2>6. Интеграции</h2>
+
+<ul>
+<li>REST API</li>
+<li>Google Analytics</li>
+<li>CRM</li>
+<li>Email уведомления</li>
+<li>Event-driven архитектура</li>
+</ul>
+
+<pre>
+Frontend → API Gateway → Services → External APIs
+</pre>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg">
+</div>
+</div>
+
+<div class="block" id="nonfunc">
+<h2>7. Нефункциональные требования</h2>
+
+<ul>
+<li>Доступность 99.5%</li>
+<li>Масштабируемость</li>
+<li>Логирование</li>
+<li>Бэкапы</li>
+<li>SEO оптимизация</li>
+</ul>
+
+<div class="callout">
+Эти требования определяют устойчивость и жизненный цикл системы.
+</div>
+
+<div class="image">
+<img src="https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg">
+</div>
+</div>
+
+</div>
+
+<!-- RIGHT -->
+<div class="rightbar">
+
+<div class="right-card">
+<h4>Сводка системы</h4>
+<div class="metric">Uptime: 99.5%</div>
+<div class="metric">Средняя загрузка: 2.1s</div>
+<div class="metric">API отклик: 180ms</div>
+</div>
+
+<div class="right-card">
+<h4>Статусы модулей</h4>
+<div class="metric">Frontend — стабилен</div>
+<div class="metric">Backend — стабилен</div>
+<div class="metric">Интеграции — активны</div>
+</div>
+
+<div class="right-card">
+<h4>Теги системы</h4>
+<span class="tag">WEB01</span>
+<span class="tag">SPA</span>
+<span class="tag">REST</span>
+<span class="tag">CI/CD</span>
+<span class="tag">Security</span>
+</div>
+
+</div>
+
+</div>
+  </div>
+<script>
+function show(id,btn){
+    document.querySelectorAll('.block').forEach(b=>b.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+
+    document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+}
+</script>
+
+</body>
+</html>
