@@ -1,0 +1,431 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB01 — Enterprise Architecture</title>
+
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    background:
+        radial-gradient(circle at 10% 10%, #dbeafe 0%, transparent 40%),
+        radial-gradient(circle at 90% 20%, #e0e7ff 0%, transparent 45%),
+        #f8fafc;
+    color:#0f172a;
+}
+
+/* HERO */
+.hero{
+    padding:80px 40px;
+    text-align:center;
+}
+
+.hero-inner{max-width:1100px;margin:0 auto;}
+
+.label{
+    display:inline-block;
+    padding:8px 16px;
+    border-radius:999px;
+    background:rgba(79,70,229,0.1);
+    color:#4f46e5;
+    font-weight:600;
+    font-size:13px;
+}
+
+.hero h1{
+    font-size:54px;
+    margin:18px 0;
+    letter-spacing:-1px;
+}
+
+.hero p{
+    font-size:18px;
+    color:#475569;
+    max-width:850px;
+    margin:0 auto;
+    line-height:1.75;
+}
+
+/* LAYOUT */
+.layout{
+    max-width:1500px;
+    margin:0 auto;
+    padding:40px;
+    display:grid;
+    grid-template-columns:280px 1fr 360px;
+    gap:30px;
+}
+
+/* NAV */
+.nav-card{
+    position:sticky;
+    top:30px;
+    background:rgba(255,255,255,0.85);
+    backdrop-filter:blur(12px);
+    border:1px solid #e5e7eb;
+    border-radius:20px;
+    padding:22px;
+    box-shadow:0 25px 60px rgba(15,23,42,0.08);
+}
+
+.nav-card h3{
+    margin-bottom:16px;
+    font-size:15px;
+    color:#334155;
+}
+
+.nav-item{
+    width:100%;
+    padding:12px 14px;
+    margin-bottom:10px;
+    border:none;
+    border-radius:12px;
+    background:#f1f5f9;
+    cursor:pointer;
+    text-align:left;
+    font-weight:500;
+    color:#475569;
+}
+
+.nav-item.active{
+    background:#4f46e5;
+    color:white;
+}
+
+/* CENTER */
+.spec-block{
+    display:none;
+    background:rgba(255,255,255,0.9);
+    backdrop-filter:blur(10px);
+    border:1px solid #e5e7eb;
+    border-radius:24px;
+    padding:40px;
+    box-shadow:0 30px 80px rgba(15,23,42,0.08);
+}
+
+.spec-block.active{display:block;}
+
+.spec-block h2{
+    font-size:30px;
+    margin-bottom:14px;
+}
+
+.spec-block p{
+    color:#475569;
+    line-height:1.85;
+    margin-bottom:14px;
+    font-size:16px;
+}
+
+/* IMAGE */
+img{
+    width:100%;
+    border-radius:16px;
+    margin:18px 0;
+    object-fit:cover;
+    height:260px;
+}
+
+/* FEATURE */
+.feature-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+    gap:14px;
+    margin-top:20px;
+}
+
+.feature{
+    background:#f8fafc;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:18px;
+}
+
+.feature h4{margin-bottom:6px;}
+
+/* DIAGRAM */
+pre{
+    background:#0f172a;
+    color:#e2e8f0;
+    padding:20px;
+    border-radius:16px;
+    overflow:auto;
+    margin:18px 0;
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* RIGHT */
+.visual-card{
+    background:white;
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:0 25px 60px rgba(15,23,42,0.08);
+    border:1px solid #e5e7eb;
+}
+
+.visual-card img{
+    width:100%;
+    height:220px;
+    object-fit:cover;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.visual-content{
+    padding:18px;
+}
+
+.visual-content h4{margin-bottom:6px;}
+.visual-content p{color:#64748b;font-size:14px;}
+
+/* MOBILE */
+@media(max-width:1200px){
+.layout{grid-template-columns:1fr;}
+.nav-card{position:relative;}
+}
+</style>
+</head>
+
+<body>
+
+<div class="hero">
+<div class="hero-inner">
+<div class="label">WEB01 • ENTERPRISE DOCUMENTATION</div>
+<h1>Архитектура корпоративной платформы</h1>
+<p>
+Документ описывает полную структуру WEB01 как корпоративной системы:
+frontend, backend, инфраструктура, безопасность и производительность
+с фокусом на масштабируемость и устойчивость.
+</p>
+</div>
+</div>
+
+<div class="layout">
+
+<!-- NAV -->
+<aside>
+<div class="nav-card">
+<h3>Разделы системы</h3>
+
+<button class="nav-item active" onclick="switchTab('frontend',this)">Frontend</button>
+<button class="nav-item" onclick="switchTab('backend',this)">Backend</button>
+<button class="nav-item" onclick="switchTab('infra',this)">Инфраструктура</button>
+<button class="nav-item" onclick="switchTab('perf',this)">Производительность</button>
+<button class="nav-item" onclick="switchTab('sec',this)">Безопасность</button>
+
+</div>
+</aside>
+
+<!-- CENTER -->
+<main>
+
+<div class="spec-block active" id="frontend">
+<h2>Frontend архитектура</h2>
+
+<p>
+Frontend системы WEB01 построен как модульное SPA приложение с компонентной архитектурой.
+Основная цель — обеспечить быстрый отклик интерфейса при высокой сложности бизнес-логики.
+</p>
+
+<img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1600">
+
+<p>
+Система использует подход разделения ответственности: UI, состояние и API слой изолированы.
+Это позволяет независимо масштабировать интерфейс и снижать связность компонентов.
+</p>
+
+<pre>
+UI LAYER
+ ├── Components
+ ├── Pages
+ ├── Layouts
+ └── Design System
+
+STATE LAYER
+ ├── Store
+ ├── Cache
+ └── Persistence
+
+API LAYER
+ ├── REST Client
+ └── WebSocket
+</pre>
+
+<div class="feature-grid">
+<div class="feature"><h4>Design System</h4><p>единые UI токены и компоненты</p></div>
+<div class="feature"><h4>SSR Ready</h4><p>server-side rendering</p></div>
+<div class="feature"><h4>Lazy Loading</h4><p>оптимизация загрузки</p></div>
+<div class="feature"><h4>State Control</h4><p>централизованное состояние</p></div>
+</div>
+
+<p>
+Frontend также включает систему accessibility (a11y), поддержку keyboard navigation
+и адаптивность под широкий спектр устройств — от мобильных до 4K дисплеев.
+</p>
+</div>
+
+<div class="spec-block" id="backend">
+<h2>Backend архитектура</h2>
+
+<p>
+Backend WEB01 реализует распределённую архитектуру на основе микросервисов.
+Каждый сервис отвечает за отдельную бизнес-область и масштабируется независимо.
+</p>
+
+<img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1600">
+
+<p>
+API Gateway является единой точкой входа, через которую проходят все клиентские запросы.
+Он отвечает за авторизацию, логирование, rate limiting и маршрутизацию.
+</p>
+
+<pre>
+CLIENT
+  ↓
+API GATEWAY
+  ↓
+SERVICE LAYER
+ ├── Auth Service
+ ├── Content Service
+ ├── Analytics Service
+ └── Notification Service
+  ↓
+DATA LAYER
+ ├── PostgreSQL
+ └── Redis Cache
+</pre>
+
+<p>
+Система поддерживает асинхронную обработку задач через очередь событий,
+что позволяет обрабатывать нагрузку без блокировки основного потока выполнения.
+</p>
+</div>
+
+<div class="spec-block" id="infra">
+<h2>Инфраструктура</h2>
+
+<p>
+Инфраструктура WEB01 построена по принципу cloud-native и включает автоматическое масштабирование,
+изоляцию окружений и непрерывную доставку обновлений.
+</p>
+
+<img src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1600">
+
+<p>
+Каждое окружение (dev / staging / production) полностью изолировано, что снижает риск
+непреднамеренного влияния изменений на продуктивную систему.
+</p>
+
+<pre>
+CI/CD PIPELINE
+ ├── Build
+ ├── Unit Tests
+ ├── Security Scan
+ ├── Deploy Staging
+ └── Deploy Production
+</pre>
+
+<p>
+Мониторинг системы включает метрики производительности, логирование событий
+и алертинг при отклонениях от SLA.
+</p>
+</div>
+
+<div class="spec-block" id="perf">
+<h2>Производительность</h2>
+
+<p>
+Производительность является ключевым показателем качества системы WEB01.
+Оптимизация охватывает все уровни: frontend, backend и сеть доставки контента.
+</p>
+
+<img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1600">
+
+<p>
+Особое внимание уделяется Time To Interactive (TTI) и First Contentful Paint (FCP),
+так как они напрямую влияют на пользовательский опыт.
+</p>
+
+<div class="feature-grid">
+<div class="feature"><h4>CDN</h4><p>глобальная доставка контента</p></div>
+<div class="feature"><h4>SSR</h4><p>серверный рендеринг</p></div>
+<div class="feature"><h4>Cache Layer</h4><p>многоуровневое кеширование</p></div>
+<div class="feature"><h4>Compression</h4><p>Brotli / Gzip</p></div>
+</div>
+
+<p>
+Целевой показатель системы — стабильная работа при высокой нагрузке
+без деградации пользовательского интерфейса.
+</p>
+</div>
+
+<div class="spec-block" id="sec">
+<h2>Безопасность</h2>
+
+<p>
+Безопасность WEB01 реализована на уровне сети, приложения и данных.
+Система соответствует стандартным практикам защиты корпоративных платформ.
+</p>
+
+<img src="https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1600">
+
+<p>
+Все входящие данные проходят валидацию, а критические операции защищены токенами доступа.
+</p>
+
+<div class="feature-grid">
+<div class="feature"><h4>HTTPS</h4><p>TLS шифрование трафика</p></div>
+<div class="feature"><h4>XSS Protection</h4><p>санитизация input</p></div>
+<div class="feature"><h4>CSRF Tokens</h4><p>защита запросов</p></div>
+<div class="feature"><h4>RBAC</h4><p>ролевая модель доступа</p></div>
+</div>
+
+<p>
+Дополнительно система включает аудит действий пользователей и логирование
+всех критических операций для обеспечения прозрачности.
+</p>
+</div>
+
+</main>
+
+<!-- RIGHT -->
+<aside id="right">
+
+<div class="visual-card">
+<img src="https://images.pexels.com/photos/1181675/pexels-photo-1181675.jpeg?auto=compress&cs=tinysrgb&w=1600">
+<div class="visual-content">
+<h4>Enterprise Platform</h4>
+<p>единая корпоративная система управления</p>
+</div>
+</div>
+
+</aside>
+
+</div>
+
+<script>
+const rightMap = {
+frontend:`<div class="visual-card"><img src="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?auto=compress&cs=tinysrgb&w=1600"><div class="visual-content"><h4>Frontend System</h4><p>UI architecture</p></div></div>`,
+backend:`<div class="visual-card"><img src="https://images.pexels.com/photos/1181671/pexels-photo-1181671.jpeg?auto=compress&cs=tinysrgb&w=1600"><div class="visual-content"><h4>Backend System</h4><p>microservices layer</p></div></div>`,
+infra:`<div class="visual-card"><img src="https://images.pexels.com/photos/325229/pexels-photo-325229.jpeg?auto=compress&cs=tinysrgb&w=1600"><div class="visual-content"><h4>Infrastructure</h4><p>cloud & CI/CD</p></div></div>`,
+perf:`<div class="visual-card"><img src="https://images.pexels.com/photos/270348/pexels-photo-270348.jpeg?auto=compress&cs=tinysrgb&w=1600"><div class="visual-content"><h4>Performance</h4><p>optimization</p></div></div>`,
+sec:`<div class="visual-card"><img src="https://images.pexels.com/photos/5380664/pexels-photo-5380664.jpeg?auto=compress&cs=tinysrgb&w=1600"><div class="visual-content"><h4>Security</h4><p>protection layer</p></div></div>`
+};
+
+function switchTab(id,btn){
+document.querySelectorAll('.spec-block').forEach(b=>b.classList.remove('active'));
+document.getElementById(id).classList.add('active');
+
+document.querySelectorAll('.nav-item').forEach(n=>n.classList.remove('active'));
+btn.classList.add('active');
+
+document.getElementById('right').innerHTML = rightMap[id];
+}
+</script>
+
+</body>
+</html>
