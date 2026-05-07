@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB01 — API и интеграции</title>
+
+<style>
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    
+}
+  .body {background:rgba(193, 213, 255, 0.5);        
+    color:#080b0e;}
+
+.hero{
+    padding:70px 0px 20px 0px;
+}
+
+.hero p{max-width: 900px;
+      color: #080b0e;
+      font-size:18px;
+      line-height:1.7}
+
+.container{
+    max-width:1300px;
+    padding:0px 20px 40px 60px;
+
+}
+
+.section{
+    background:rgba(255, 255, 255, 0.5);
+    border:1px solid #ececec;
+    border-radius:18px;
+    padding:30px;
+    margin-bottom:25px;
+    box-shadow:0 8px 25px rgba(0,0,0,0.04);
+    transition:0.25s ease;
+}
+
+.section:hover{
+    transform:translateY(-5px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.08);
+}
+  .section h2, h3, h4, p {color:#080b0e !important;}
+
+.small{
+    color:#080b0e;
+    font-size:14px;
+    line-height:1.6;
+  color:#111827;
+}
+
+.tag{
+  display:inline-block;
+    padding:8px 14px;
+    background:rgba(193,166,240,0.53);
+    color:#080b0e;
+    border:1px solid rgba(124,58,237,0.3);
+    border-radius:40px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    margin-top:10px;
+}
+
+th,td{
+    border-bottom:1px solid #d1cece;
+    padding:12px;
+    font-size:14px;
+    text-align:left;
+}
+
+th{
+    background:#dadde0;
+    color: #080b0e;
+}
+
+/* DASHBOARD */
+.dashboard{
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+    gap:15px;
+    margin-top:15px;
+}
+
+.card{
+    background:linear-gradient(311deg,#d1d7e9,#f8fafc);
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:18px;
+}
+
+.card .label{
+    font-size:12px;
+    color: #080b0e;
+    text-transform:uppercase;
+}
+
+.card .value{
+    font-size:22px;
+    font-weight:700;
+    margin-top:8px;
+}
+
+/* STATUS COLORS */
+.ok{color:#16a34a;}
+.warn{color:#ca8a04;}
+.bad{color:#dc2626;}
+
+/* MINI METRICS BAR */
+.metric-bar{
+    height:8px;
+    background:#e5e7eb;
+    border-radius:10px;
+    overflow:hidden;
+    margin-top:8px;
+}
+
+.metric-fill{
+    height:100%;
+    background:#4f46e5;
+}
+
+/* DIAGRAM */
+.diagram{
+    background:#0f172a;
+    color:#fff;
+    padding:20px;
+    border-radius:16px;
+    font-family:monospace;
+    font-size:13px;
+    line-height:1.5;
+}
+</style>
+</head>
+
+<body>
+  <div class="body">
+
+
+
+<div class="container">
+<div class="hero">
+    <div class="tag">WEB01 • API И ИНТЕГРАЦИИ</div>
+    <p>Данный раздел описывает архитектуру интеграций WEB01, включая взаимодействие с внешними сервисами, внутренний REST API слой, модель событийной передачи данных и принципы отказоустойчивости.</p>
+</div>
+<!-- 1 -->
+<div class="section">
+<h2>1. Общая модель интеграций</h2>
+<p class="small">Интеграционный слой WEB01 построен как промежуточный уровень между клиентским интерфейсом и внешними сервисами.
+Он обеспечивает нормализацию данных, контроль ошибок и единый формат взаимодействия.</p>
+
+<p class="small">Все интеграции разделены на синхронные REST вызовы, асинхронные события и фоновые процессы.
+Frontend не обращается напрямую к сторонним API.</p>
+</div>
+
+<!-- 2 DIAGRAM -->
+<div class="section">
+<h2>2. Архитектура интеграционного слоя</h2>
+
+<div class="diagram">
+  <pre>
+USER BROWSER
+   ↓
+WEB01 BACKEND API (Gateway)
+   ↓
++----------------------+
+|  INTEGRATION LAYER   |
++----------------------+
+   ↓        ↓        ↓
+Analytics  Email   CMS API
+   ↓
+Monitoring & Logs
+</pre>
+</div>
+
+<p class="small">Все интеграции проходят через gateway слой, который управляет авторизацией, лимитами и логированием.</p>
+</div>
+
+<!-- 3 DASHBOARD -->
+<div class="section">
+<h2>3. Карта интеграций (операционный статус)</h2>
+
+<div class="dashboard">
+
+<div class="card">
+<div class="label">Google Analytics</div>
+<div class="value ok">Активно</div>
+<div class="metric-bar"><div class="metric-fill" style="width:92%"></div></div>
+</div>
+
+<div class="card">
+<div class="label">Яндекс.Метрика</div>
+<div class="value ok">Активно</div>
+<div class="metric-bar"><div class="metric-fill" style="width:88%"></div></div>
+</div>
+
+<div class="card">
+<div class="label">Email SMTP</div>
+<div class="value warn">Стабильно</div>
+<div class="metric-bar"><div class="metric-fill" style="width:76%"></div></div>
+</div>
+
+<div class="card">
+<div class="label">CMS API</div>
+<div class="value ok">Онлайн</div>
+<div class="metric-bar"><div class="metric-fill" style="width:95%"></div></div>
+</div>
+
+</div>
+</div>
+
+<!-- 4 API -->
+<div class="section">
+<h2>4. REST API структура</h2>
+
+<p class="small">Все внутренние API используют версию v1 и JSON формат обмена данными.</p>
+
+<table>
+<tr><th>Endpoint</th><th>Метод</th><th>Описание</th></tr>
+<tr><td>/pages</td><td>GET</td><td>Получение страниц</td></tr>
+<tr><td>/forms/contact</td><td>POST</td><td>Обратная связь</td></tr>
+<tr><td>/health</td><td>GET</td><td>Состояние системы</td></tr>
+</table>
+
+<!-- API DASHBOARD -->
+<h3>API Health Dashboard</h3>
+
+<div class="dashboard">
+
+<div class="card">
+<div class="label">Avg Response Time</div>
+<div class="value">182 ms</div>
+</div>
+
+<div class="card">
+<div class="label">Error Rate</div>
+<div class="value ok">0.4%</div>
+</div>
+
+<div class="card">
+<div class="label">Uptime</div>
+<div class="value ok">99.97%</div>
+</div>
+
+<div class="card">
+<div class="label">Requests / min</div>
+<div class="value">1240</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- 5 ANALYTICS -->
+<div class="section">
+<h2>5. Интеграция с аналитикой</h2>
+
+<p class="small">Система использует Google Analytics и Яндекс.Метрику для сбора поведенческих данных.</p>
+
+<h3>Event Dashboard</h3>
+
+<div class="dashboard">
+
+<div class="card">
+<div class="label">page_view</div>
+<div class="value">24 810</div>
+</div>
+
+<div class="card">
+<div class="label">form_submit</div>
+<div class="value">1 284</div>
+</div>
+
+<div class="card">
+<div class="label">button_click</div>
+<div class="value">18 402</div>
+</div>
+
+<div class="card">
+<div class="label">conversion rate</div>
+<div class="value ok">4.8%</div>
+</div>
+
+</div>
+
+</div>
+
+<!-- 6 EMAIL -->
+<div class="section">
+<h2>6. Email-интеграции</h2>
+
+<p class="small">Email система работает через SMTP gateway с retry логикой и логированием отправок.</p>
+</div>
+
+<!-- 7 RULES -->
+<div class="section">
+<h2>7. Требования к интеграциям</h2>
+
+<p class="small">Все внешние запросы изолированы внутри backend слоя. Прямые вызовы запрещены.</p>
+
+<p class="small">Каждая интеграция должна иметь fallback режим и логирование ошибок.</p>
+</div>
+
+</div>
+  </div>
+</body>
+</html>
