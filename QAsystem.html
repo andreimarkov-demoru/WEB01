@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WEB01 — План тестирования</title>
+
+<style>
+:root{
+    --bg1:#f4f6ff;
+    --bg2:#eef2ff;
+    --card:#ffffffcc;
+    --border:#e5e7eb;
+    --text:#080b0e;
+    --muted:#64748b;
+    --accent:#4f46e5;
+    --accent2:#22c55e;
+    --shadow:0 20px 60px rgba(15,23,42,0.10);
+    --radius:20px;
+}
+
+*{
+    box-sizing:border-box;
+}
+
+body{
+    margin:0;
+    font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;
+    
+}
+  .body {background:rgba(193, 213, 255, 0.5);        
+    color:#080b0e;}
+
+/* HERO */
+.hero{
+    padding:70px 24px 0px;
+  max-width:1200px;
+  margin:0px auto;
+  
+}
+
+.hero p{
+    max-width: 900px;
+      color: #080b0e;
+      font-size:18px;
+      line-height:1.7
+}
+
+/* TAG */
+.tag{
+    display:inline-block;
+    padding:8px 14px;
+    background:rgba(193,166,240,0.53);
+    color:var(--text);
+    border:1px solid rgba(124,58,237,0.3);
+    border-radius:40px;
+    font-size:12px;
+    margin-bottom:18px;
+}
+
+/* PAGE LAYOUT */
+.main{
+    max-width:1200px;
+    margin:30px auto 0px;
+    padding:0 24px 50px;
+    display:grid;
+    grid-template-columns:2.2fr 1fr;
+    gap:22px;
+}
+
+@media(max-width:1000px){
+    .main{grid-template-columns:1fr;}
+}
+
+/* SECTIONS */
+.section{
+    background:rgba(255, 255, 255, 0.5);
+    border:1px solid var(--border);
+    border-radius:var(--radius);
+    padding:24px;
+    margin-bottom:18px;
+    transition:.25s;
+}
+
+.section:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 45px rgba(0,0,0,0.02);
+}
+
+.section h2{
+    margin:0 0 10px;
+    font-size:18px;
+}
+  .section h2, h3, h4, p {color:#080b0e !important;}
+
+/* GRID */
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:12px;
+}
+
+@media(max-width:900px){
+    .stats{grid-template-columns:repeat(2,1fr);}
+}
+
+.card{
+    background:linear-gradient(311deg,#d1d7e9,#f8fafc);
+    border:1px solid var(--border);
+    border-radius:16px;
+    padding:14px;
+}
+
+.card b{
+    font-size:22px;
+    display:block;
+    margin-top:6px;
+}
+
+.card span{
+    font-size:12px;
+    color:#080b0e;
+    text-transform:uppercase;
+}
+
+/* PIPELINE */
+.pipeline{
+    display:flex;
+    gap:10px;
+    overflow:auto;
+    padding-bottom:6px;
+}
+
+.step{
+    min-width:150px;
+    background:rgba(255, 255, 255, 0.8);
+    border:1px solid #c7c9cb;
+    border-radius:14px;
+    padding:12px;
+    position:relative;
+}
+
+.step b{
+    color:var(--accent);
+    font-size:13px;
+}
+
+.step span{
+    color:#111827;
+    font-size:12px;
+}
+
+.step:after{
+    content:"→";
+    position:absolute;
+    right:-12px;
+    top:50%;
+    transform:translateY(-50%);
+    color:#c7c9cb;
+}
+
+.step:last-child:after{display:none;}
+
+/* TABLE */
+table{
+    width:100%;
+    border-collapse:collapse;
+    font-size:13px;
+}
+
+th,td{
+    padding:10px;
+    border-bottom:1px solid #d1cece;
+    text-align:left;
+}
+
+
+  th{
+    background:#dadde0;
+    color: #080b0e;
+}
+
+/* BADGES */
+.badge{
+    padding:4px 10px;
+    border-radius:999px;
+    font-size:11px;
+    font-weight:600;
+}
+
+.ok{background:#dcfce7;color:#166534;}
+.warn{background:#fef9c3;color:#854d0e;}
+.bad{background:#fee2e2;color:#991b1b;}
+
+/* SIDEBAR */
+.sidebar{
+    display:flex;
+    flex-direction:column;
+    gap:16px;
+}
+
+.side{
+    background:rgba(255, 255, 255, 0.65);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:18px;
+}
+
+.side h3{
+    margin:0 0 8px;
+    font-size:14px;
+}
+
+.side p{
+    margin:0;
+    color:var(--muted);
+    font-size:13px;
+    line-height:1.6;
+}
+
+/* LIST */
+.list{
+    margin:0;
+    padding:0;
+    list-style:none;
+}
+
+.list li{
+    display:flex;
+    gap:8px;
+    margin:8px 0;
+    font-size:13px;
+    color:var(--text);
+}
+
+.tick{
+    color:var(--accent2);
+    font-weight:700;
+}
+</style>
+
+</head>
+
+<body>
+<div class="body">
+<header class="hero">
+            <div>
+                <div class="tag"><span class="tag-dot"></span> WEB01 • QA SYSTEM</div>
+                <p>Комплексная стратегия QA для WEB01: автоматизация тестирования, контроль качества, CI/CD интеграция и управление стабильностью релизов.</p>
+            </div>
+</header>
+
+<main class="main">
+
+<!-- LEFT -->
+<div>
+
+<section class="section">
+<h2>1. Стратегия тестирования</h2>
+<p style="color:#64748b;font-size:14px;line-height:1.6">
+Многоуровневая система QA охватывает frontend, backend, интеграции и инфраструктуру.
+</p>
+</section>
+
+<section class="section">
+<h2>2. Покрытие тестами</h2>
+
+<div class="stats">
+<div class="card"><span>Frontend</span><b>92%</b></div>
+<div class="card"><span>Backend</span><b>88%</b></div>
+<div class="card"><span>API</span><b>81%</b></div>
+<div class="card"><span>Risk</span><b>Low</b></div>
+</div>
+
+</section>
+
+<section class="section">
+<h2>3. CI/CD Pipeline</h2>
+
+<div class="pipeline">
+<div class="step"><b>Commit</b><span> push</span></div>
+<div class="step"><b>Lint</b><span> check</span></div>
+<div class="step"><b>Unit</b><span> tests</span></div>
+<div class="step"><b>API</b><span> validation</span></div>
+<div class="step"><b>E2E</b><span> UI tests</span></div>
+<div class="step"><b>Deploy</b><span> release</span></div>
+</div>
+
+</section>
+
+<section class="section">
+<h2>4. Матрица тестирования</h2>
+
+<table>
+<tr><th>Тип</th><th>Описание</th><th>Покрытие</th><th>Статус</th></tr>
+<tr><td>Unit</td><td>Функции</td><td>85%</td><td><span class="badge ok">OK</span></td></tr>
+<tr><td>Integration</td><td>API</td><td>80%</td><td><span class="badge ok">OK</span></td></tr>
+<tr><td>E2E</td><td>UI сценарии</td><td>70%</td><td><span class="badge warn">mid</span></td></tr>
+<tr><td>Load</td><td>нагрузка</td><td>60%</td><td><span class="badge warn">dev</span></td></tr>
+</table>
+
+</section>
+
+<section class="section">
+<h2>5. Критерии релиза</h2>
+<ul class="list">
+<li><span class="tick">✓</span> нет критических ошибок</li>
+<li><span class="tick">✓</span> coverage ≥ 80%</li>
+<li><span class="tick">✓</span> E2E пройдены</li>
+<li><span class="tick">✓</span> API стабилен</li>
+</ul>
+</section>
+
+</div>
+
+<!-- RIGHT -->
+<aside class="sidebar">
+
+<div class="side">
+<h3>Контроль качества</h3>
+<p>QA встроен в CI/CD pipeline и блокирует релиз при критических ошибках.</p>
+</div>
+
+<div class="side">
+<h3>Риски</h3>
+<p>Основной риск — интеграции сторонних сервисов и нестабильные API.</p>
+</div>
+
+<div class="side">
+<h3>Модель</h3>
+<p>Автоматизированная тестовая пирамида: unit → integration → e2e.</p>
+</div>
+
+</aside>
+
+</main>
+  </div>
+</body>
+</html>
