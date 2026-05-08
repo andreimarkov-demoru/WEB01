@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HR01 — Реестр нарушений аудита</title>
+
+<style>
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:Calibri, Arial, sans-serif;
+}
+
+body{
+    background:#f1f3f4;
+    color:#222;
+    overflow:hidden;
+}
+
+/* TOP BAR */
+
+.topbar{
+    height:48px;
+    background:#217346;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    color:white;
+    gap:24px;
+    font-size:14px;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:700;
+}
+
+.menu{
+    display:flex;
+    gap:18px;
+}
+
+/* RIBBON */
+
+.ribbon{
+    background:#fff;
+    border-bottom:1px solid #d9d9d9;
+    display:flex;
+    gap:28px;
+    padding:12px 18px;
+    flex-wrap:wrap;
+}
+
+.ribbon-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.ribbon-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    background:#f8f8f8;
+    border:1px solid #d0d0d0;
+    border-radius:4px;
+    padding:6px 10px;
+    font-size:13px;
+}
+
+.ribbon-title{
+    font-size:11px;
+    color:#666;
+    text-transform:uppercase;
+}
+
+/* FORMULA */
+
+.formula-bar{
+    background:#fff;
+    border-bottom:1px solid #d9d9d9;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 14px;
+}
+
+.name-box{
+    width:80px;
+    border:1px solid #cfcfcf;
+    padding:6px;
+    background:#fff;
+    font-size:13px;
+}
+
+.fx{
+    font-weight:700;
+    color:#666;
+}
+
+.formula-input{
+    flex:1;
+    border:1px solid #cfcfcf;
+    padding:6px 10px;
+    font-size:13px;
+}
+
+/* SHEET */
+
+.sheet-wrapper{
+    overflow:auto;
+    height:calc(100vh - 160px);
+    background:white;
+}
+
+.sheet{
+    border-collapse:collapse;
+    width:max-content;
+    min-width:100%;
+}
+
+.sheet th,
+.sheet td{
+    border:1px solid #d9d9d9;
+    padding:8px 12px;
+    height:34px;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.sheet thead th{
+    background:#f3f3f3;
+    color:#666;
+    text-align:center;
+    font-weight:600;
+}
+
+.row-num{
+    background:#f3f3f3;
+    color:#666;
+    text-align:center;
+    width:50px;
+}
+
+.header-row td{
+    background:#e2f0d9;
+    font-weight:700;
+}
+
+.status-high{
+    background:#f8d7da;
+    color:#a94442;
+    font-weight:700;
+    text-align:center;
+}
+
+.status-mid{
+    background:#fff3cd;
+    color:#9a6700;
+    font-weight:700;
+    text-align:center;
+}
+
+.status-low{
+    background:#dff0d8;
+    color:#2e7d32;
+    font-weight:700;
+    text-align:center;
+}
+
+.done{
+    background:#dff0d8;
+    color:#2e7d32;
+    font-weight:700;
+    text-align:center;
+}
+
+.progress{
+    background:#fff3cd;
+    color:#9a6700;
+    font-weight:700;
+    text-align:center;
+}
+
+.open{
+    background:#f8d7da;
+    color:#a94442;
+    font-weight:700;
+    text-align:center;
+}
+
+.statusbar{
+    height:30px;
+    background:#217346;
+    color:white;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    padding:0 14px;
+    font-size:12px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+}
+
+.tab{
+    background:#ffffff22;
+    padding:4px 12px;
+    border-radius:4px;
+}
+
+@media(max-width:900px){
+
+    .sheet td,
+    .sheet th{
+        font-size:12px;
+        padding:6px 8px;
+    }
+
+}
+
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="logo">Excel</div>
+
+    <div class="menu">
+        <span>Файл</span>
+        <span>Главная</span>
+        <span>Вставка</span>
+        <span>Формулы</span>
+        <span>Данные</span>
+        <span>Рецензирование</span>
+        <span>Вид</span>
+    </div>
+</div>
+
+<div class="ribbon">
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Вставить</div>
+            <div class="btn">Копировать</div>
+            <div class="btn">Формат</div>
+        </div>
+        <div class="ribbon-title">Буфер обмена</div>
+    </div>
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Calibri</div>
+            <div class="btn">14</div>
+            <div class="btn">Ж</div>
+            <div class="btn">К</div>
+            <div class="btn">Ч</div>
+        </div>
+        <div class="ribbon-title">Шрифт</div>
+    </div>
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Фильтр</div>
+            <div class="btn">Сортировка</div>
+            <div class="btn">Условие</div>
+        </div>
+        <div class="ribbon-title">Данные</div>
+    </div>
+
+</div>
+
+<div class="formula-bar">
+    <div class="name-box">A1</div>
+    <div class="fx">fx</div>
+    <div class="formula-input">HR01 — Реестр нарушений аудита кадровой документации</div>
+</div>
+
+<div class="sheet-wrapper">
+
+<table class="sheet">
+
+<thead>
+<tr>
+    <th class="row-num"></th>
+    <th>A</th>
+    <th>B</th>
+    <th>C</th>
+    <th>D</th>
+    <th>E</th>
+    <th>F</th>
+    <th>G</th>
+    <th>H</th>
+</tr>
+</thead>
+
+<tbody>
+
+<tr class="header-row">
+<td class="row-num">1</td>
+<td>ID</td>
+<td>Сотрудник</td>
+<td>Документ</td>
+<td>Нарушение</td>
+<td>Критичность</td>
+<td>Ответственный</td>
+<td>Статус</td>
+<td>Комментарий</td>
+</tr>
+
+<tr><td class="row-num">2</td><td>1</td><td>Иванов А.А.</td><td>Трудовой договор</td><td>Отсутствует подпись сотрудника</td><td class="status-high">HIGH</td><td>HR</td><td class="open">OPEN</td><td>Требуется повторное подписание</td></tr>
+
+<tr><td class="row-num">3</td><td>2</td><td>Петров Д.В.</td><td>Личное дело</td><td>Не хватает копии паспорта</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Запрошены документы</td></tr>
+
+<tr><td class="row-num">4</td><td>3</td><td>Сидорова Е.Н.</td><td>Приказ</td><td>Нет даты ознакомления</td><td class="status-low">LOW</td><td>Контроль</td><td class="done">DONE</td><td>Исправлено</td></tr>
+
+<tr><td class="row-num">5</td><td>4</td><td>Козлов И.П.</td><td>Должностная инструкция</td><td>Версия неактуальна</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Подготовлена новая редакция</td></tr>
+
+<tr><td class="row-num">6</td><td>5</td><td>Орлова Т.С.</td><td>Личное дело</td><td>Нет согласия на обработку данных</td><td class="status-high">HIGH</td><td>Юрист</td><td class="open">OPEN</td><td>Высокий риск нарушения</td></tr>
+
+<tr><td class="row-num">7</td><td>6</td><td>Николаев Р.А.</td><td>Трудовой договор</td><td>Устаревший шаблон</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Необходимо обновление</td></tr>
+
+<tr><td class="row-num">8</td><td>7</td><td>Семенова И.Г.</td><td>Приказ</td><td>Нет подписи руководителя</td><td class="status-high">HIGH</td><td>Руководитель</td><td class="open">OPEN</td><td>Документ недействителен</td></tr>
+
+<tr><td class="row-num">9</td><td>8</td><td>Морозов В.Н.</td><td>HR-система</td><td>Несовпадение даты приема</td><td class="status-mid">MID</td><td>HRIS</td><td class="progress">IN PROGRESS</td><td>Проводится сверка</td></tr>
+
+<tr><td class="row-num">10</td><td>9</td><td>Васильева О.К.</td><td>Архив документов</td><td>Документ отсутствует в архиве</td><td class="status-high">HIGH</td><td>Архив</td><td class="open">OPEN</td><td>Требуется восстановление</td></tr>
+
+<tr><td class="row-num">11</td><td>10</td><td>Кузнецов Л.А.</td><td>Личное дело</td><td>Не приложен ИНН</td><td class="status-low">LOW</td><td>HR</td><td class="done">DONE</td><td>Документ добавлен</td></tr>
+
+<tr><td class="row-num">12</td><td>11</td><td>Тарасов Е.В.</td><td>Трудовой договор</td><td>Ошибка в должности</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Исправляется допсоглашением</td></tr>
+
+<tr><td class="row-num">13</td><td>12</td><td>Григорьева Н.С.</td><td>Приказ</td><td>Нет номера приказа</td><td class="status-low">LOW</td><td>HR</td><td class="done">DONE</td><td>Нумерация обновлена</td></tr>
+
+<tr><td class="row-num">14</td><td>13</td><td>Егоров П.М.</td><td>HR-система</td><td>Несовпадение оклада</td><td class="status-high">HIGH</td><td>Финансы</td><td class="open">OPEN</td><td>Требуется корректировка</td></tr>
+
+<tr><td class="row-num">15</td><td>14</td><td>Алексеева Д.И.</td><td>Личное дело</td><td>Нет фото сотрудника</td><td class="status-low">LOW</td><td>HR</td><td class="done">DONE</td><td>Фото загружено</td></tr>
+
+<tr><td class="row-num">16</td><td>15</td><td>Белов С.А.</td><td>Электронное согласие</td><td>Истек срок действия</td><td class="status-high">HIGH</td><td>Юрист</td><td class="open">OPEN</td><td>Необходимо обновление</td></tr>
+
+<tr><td class="row-num">17</td><td>16</td><td>Макарова Ю.В.</td><td>Должностная инструкция</td><td>Не соответствует роли</td><td class="status-mid">MID</td><td>HRBP</td><td class="progress">IN PROGRESS</td><td>Согласование изменений</td></tr>
+
+<tr><td class="row-num">18</td><td>17</td><td>Лебедев А.Г.</td><td>Приказ</td><td>Нет даты подписания</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Требуется уточнение</td></tr>
+
+<tr><td class="row-num">19</td><td>18</td><td>Дмитриева Е.А.</td><td>HR-система</td><td>Ошибка подразделения</td><td class="status-mid">MID</td><td>HRIS</td><td class="progress">IN PROGRESS</td><td>Обновление в системе</td></tr>
+
+<tr><td class="row-num">20</td><td>19</td><td>Фролов К.Н.</td><td>Архив документов</td><td>Нарушение структуры хранения</td><td class="status-low">LOW</td><td>Архив</td><td class="done">DONE</td><td>Архив реорганизован</td></tr>
+
+<tr><td class="row-num">21</td><td>20</td><td>Комарова Т.В.</td><td>Личное дело</td><td>Нет анкеты сотрудника</td><td class="status-mid">MID</td><td>HR</td><td class="progress">IN PROGRESS</td><td>Ожидается заполнение</td></tr>
+
+<tr><td class="row-num">22</td><td>21</td><td>Павлов И.С.</td><td>Трудовой договор</td><td>Не приложено допсоглашение</td><td class="status-high">HIGH</td><td>Юрист</td><td class="open">OPEN</td><td>Документ отсутствует</td></tr>
+
+<tr><td class="row-num">23</td><td>22</td><td>Жукова А.М.</td><td>Электронное согласие</td><td>Нет цифровой подписи</td><td class="status-high">HIGH</td><td>Безопасность</td><td class="open">OPEN</td><td>Требуется перевыпуск</td></tr>
+
+<tr><td class="row-num">24</td><td>23</td><td>Карпов Н.Д.</td><td>Приказ</td><td>Неверная дата документа</td><td class="status-low">LOW</td><td>HR</td><td class="done">DONE</td><td>Исправлено</td></tr>
+
+<tr><td class="row-num">25</td><td>24</td><td>Тихонова М.В.</td><td>HR-система</td><td>Дублирование карточки</td><td class="status-mid">MID</td><td>HRIS</td><td class="progress">IN PROGRESS</td><td>Карточка объединяется</td></tr>
+
+<tr><td class="row-num">26</td><td>25</td><td>Романов Е.П.</td><td>Личное дело</td><td>Нет подписи на анкете</td><td class="status-low">LOW</td><td>HR</td><td class="done">DONE</td><td>Подписано повторно</td></tr>
+
+<tr><td class="row-num">27</td><td>26</td><td>Зайцева И.А.</td><td>Трудовой договор</td><td>Ошибка в реквизитах</td><td class="status-mid">MID</td><td>Юрист</td><td class="progress">IN PROGRESS</td><td>Подготовлено исправление</td></tr>
+
+<tr><td class="row-num">28</td><td>27</td><td>Савельев О.В.</td><td>Архив документов</td><td>Файл поврежден</td><td class="status-high">HIGH</td><td>Архив</td><td class="open">OPEN</td><td>Запущено восстановление</td></tr>
+
+</tbody>
+
+</table>
+
+</div>
+
+<div class="statusbar">
+
+<div class="tabs">
+    <div class="tab">Реестр нарушений</div>
+    <div class="tab">Акт аудита</div>
+    <div class="tab">Корректировки</div>
+</div>
+
+<div>
+    Готово
+</div>
+
+</div>
+
+</body>
+</html>
