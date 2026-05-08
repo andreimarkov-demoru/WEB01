@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>WEB01 — Матрица тестового покрытия</title>
+
+<style>
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: Calibri, Arial, sans-serif;
+}
+
+body{
+    background:#f3f3f3;
+    color:#222;
+}
+
+/* TOP BAR */
+
+.topbar{
+    height:48px;
+    background:#217346;
+    display:flex;
+    align-items:center;
+    padding:0 18px;
+    color:white;
+    gap:18px;
+    font-size:14px;
+}
+
+.topbar .logo{
+    font-weight:700;
+    font-size:18px;
+}
+
+.topbar .menu{
+    display:flex;
+    gap:18px;
+    opacity:.95;
+}
+
+/* RIBBON */
+
+.ribbon{
+    background:#ffffff;
+    border-bottom:1px solid #d9d9d9;
+    padding:12px 18px;
+    display:flex;
+    gap:30px;
+    flex-wrap:wrap;
+}
+
+.ribbon-group{
+    display:flex;
+    flex-direction:column;
+    gap:8px;
+}
+
+.ribbon-title{
+    font-size:11px;
+    color:#666;
+    text-transform:uppercase;
+}
+
+.ribbon-buttons{
+    display:flex;
+    gap:8px;
+    flex-wrap:wrap;
+}
+
+.btn{
+    background:#f8f8f8;
+    border:1px solid #d0d0d0;
+    padding:6px 10px;
+    border-radius:4px;
+    font-size:13px;
+    cursor:pointer;
+}
+
+/* FORMULA BAR */
+
+.formula-bar{
+    background:white;
+    border-bottom:1px solid #d9d9d9;
+    display:flex;
+    align-items:center;
+    gap:10px;
+    padding:8px 14px;
+}
+
+.name-box{
+    width:70px;
+    border:1px solid #cfcfcf;
+    padding:6px;
+    background:#fff;
+    font-size:13px;
+}
+
+.fx{
+    font-weight:700;
+    color:#666;
+}
+
+.formula-input{
+    flex:1;
+    border:1px solid #cfcfcf;
+    padding:6px 10px;
+    background:#fff;
+    font-size:13px;
+}
+
+/* SHEET */
+
+.sheet-wrapper{
+    overflow:auto;
+    height:calc(100vh - 150px);
+}
+
+.sheet{
+    border-collapse:collapse;
+    width:max-content;
+    min-width:100%;
+    background:white;
+}
+
+.sheet th,
+.sheet td{
+    border:1px solid #d9d9d9;
+    padding:8px 12px;
+    height:34px;
+    font-size:14px;
+    white-space:nowrap;
+}
+
+.sheet thead th{
+    background:#f3f3f3;
+    font-weight:700;
+    text-align:center;
+}
+
+.row-number{
+    background:#f3f3f3;
+    text-align:center;
+    width:50px;
+    color:#666;
+}
+
+.col-letter{
+    background:#f3f3f3;
+    text-align:center;
+    color:#666;
+    font-weight:600;
+}
+
+.header-row td{
+    background:#e2f0d9;
+    font-weight:700;
+}
+
+.ok{
+    background:#dff0d8;
+    color:#2e7d32;
+    font-weight:700;
+    text-align:center;
+}
+
+.mid{
+    background:#fff3cd;
+    color:#9a6700;
+    font-weight:700;
+    text-align:center;
+}
+
+.dev{
+    background:#f8d7da;
+    color:#a94442;
+    font-weight:700;
+    text-align:center;
+}
+
+.percent{
+    font-weight:700;
+}
+
+.sheet-title{
+    padding:18px;
+    background:white;
+    border-bottom:1px solid #d9d9d9;
+    font-size:22px;
+    font-weight:700;
+}
+
+.statusbar{
+    height:28px;
+    background:#217346;
+    color:white;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    padding:0 14px;
+    font-size:12px;
+}
+
+.tabs{
+    display:flex;
+    gap:8px;
+}
+
+.tab{
+    background:#ffffff22;
+    padding:4px 10px;
+    border-radius:4px;
+}
+
+@media(max-width:900px){
+
+    .ribbon{
+        gap:18px;
+    }
+
+    .sheet th,
+    .sheet td{
+        font-size:12px;
+        padding:6px 8px;
+    }
+
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+    <div class="logo">Excel</div>
+
+    <div class="menu">
+        <span>Файл</span>
+        <span>Главная</span>
+        <span>Вставка</span>
+        <span>Разметка страницы</span>
+        <span>Формулы</span>
+        <span>Данные</span>
+        <span>Рецензирование</span>
+        <span>Вид</span>
+    </div>
+</div>
+
+<div class="ribbon">
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Вставить</div>
+            <div class="btn">Копировать</div>
+            <div class="btn">Формат</div>
+        </div>
+        <div class="ribbon-title">Буфер обмена</div>
+    </div>
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Calibri</div>
+            <div class="btn">14</div>
+            <div class="btn">Ж</div>
+            <div class="btn">К</div>
+            <div class="btn">Ч</div>
+        </div>
+        <div class="ribbon-title">Шрифт</div>
+    </div>
+
+    <div class="ribbon-group">
+        <div class="ribbon-buttons">
+            <div class="btn">Сортировка</div>
+            <div class="btn">Фильтр</div>
+            <div class="btn">Условие</div>
+        </div>
+        <div class="ribbon-title">Данные</div>
+    </div>
+
+</div>
+
+<div class="formula-bar">
+    <div class="name-box">A1</div>
+    <div class="fx">fx</div>
+    <div class="formula-input">WEB01 — Матрица тестового покрытия</div>
+</div>
+
+<div class="sheet-title">
+    WEB01 — Матрица тестового покрытия
+</div>
+
+<div class="sheet-wrapper">
+
+<table class="sheet">
+
+<thead>
+
+<tr>
+    <th class="row-number"></th>
+    <th class="col-letter">A</th>
+    <th class="col-letter">B</th>
+    <th class="col-letter">C</th>
+    <th class="col-letter">D</th>
+    <th class="col-letter">E</th>
+    <th class="col-letter">F</th>
+</tr>
+
+</thead>
+
+<tbody>
+
+<tr class="header-row">
+    <td class="row-number">1</td>
+    <td>ID</td>
+    <td>Область</td>
+    <td>Тип теста</td>
+    <td>Покрытие</td>
+    <td>Статус</td>
+    <td>Комментарий</td>
+</tr>
+
+<tr>
+<td class="row-number">2</td>
+<td>1</td>
+<td>Frontend</td>
+<td>Unit</td>
+<td class="percent">92%</td>
+<td class="ok">OK</td>
+<td>UI-компоненты стабильно проходят проверки</td>
+</tr>
+
+<tr>
+<td class="row-number">3</td>
+<td>2</td>
+<td>Frontend</td>
+<td>Integration</td>
+<td class="percent">90%</td>
+<td class="ok">OK</td>
+<td>Связки компонентов без критических ошибок</td>
+</tr>
+
+<tr>
+<td class="row-number">4</td>
+<td>3</td>
+<td>Frontend</td>
+<td>E2E</td>
+<td class="percent">84%</td>
+<td class="ok">OK</td>
+<td>Основные пользовательские сценарии пройдены</td>
+</tr>
+
+<tr>
+<td class="row-number">5</td>
+<td>4</td>
+<td>Frontend</td>
+<td>Smoke</td>
+<td class="percent">95%</td>
+<td class="ok">OK</td>
+<td>Быстрый прогон перед релизом успешен</td>
+</tr>
+
+<tr>
+<td class="row-number">6</td>
+<td>5</td>
+<td>Frontend</td>
+<td>Regression</td>
+<td class="percent">88%</td>
+<td class="ok">OK</td>
+<td>Регрессия в пределах допустимого</td>
+</tr>
+
+<tr>
+<td class="row-number">7</td>
+<td>6</td>
+<td>Backend</td>
+<td>Unit</td>
+<td class="percent">88%</td>
+<td class="ok">OK</td>
+<td>Бизнес-логика покрыта хорошо</td>
+</tr>
+
+<tr>
+<td class="row-number">8</td>
+<td>7</td>
+<td>Backend</td>
+<td>Integration</td>
+<td class="percent">82%</td>
+<td class="ok">OK</td>
+<td>Интеграция сервисов стабильна</td>
+</tr>
+
+<tr>
+<td class="row-number">9</td>
+<td>8</td>
+<td>Backend</td>
+<td>API</td>
+<td class="percent">81%</td>
+<td class="ok">OK</td>
+<td>Контракты API проходят валидацию</td>
+</tr>
+
+<tr>
+<td class="row-number">10</td>
+<td>9</td>
+<td>Backend</td>
+<td>Security</td>
+<td class="percent">76%</td>
+<td class="mid">mid</td>
+<td>Требуется усиление проверок доступа</td>
+</tr>
+
+<tr>
+<td class="row-number">11</td>
+<td>10</td>
+<td>Backend</td>
+<td>Regression</td>
+<td class="percent">85%</td>
+<td class="ok">OK</td>
+<td>Ошибок после изменений не выявлено</td>
+</tr>
+
+<tr>
+<td class="row-number">12</td>
+<td>11</td>
+<td>API</td>
+<td>Unit</td>
+<td class="percent">79%</td>
+<td class="mid">mid</td>
+<td>Часть сценариев требует доработки</td>
+</tr>
+
+<tr>
+<td class="row-number">13</td>
+<td>12</td>
+<td>API</td>
+<td>Integration</td>
+<td class="percent">80%</td>
+<td class="ok">OK</td>
+<td>Обмен данными между сервисами успешен</td>
+</tr>
+
+<tr>
+<td class="row-number">14</td>
+<td>13</td>
+<td>API</td>
+<td>Contract</td>
+<td class="percent">83%</td>
+<td class="ok">OK</td>
+<td>Схемы запросов и ответов валидны</td>
+</tr>
+
+<tr>
+<td class="row-number">15</td>
+<td>14</td>
+<td>API</td>
+<td>Performance</td>
+<td class="percent">72%</td>
+<td class="mid">mid</td>
+<td>Нужна оптимизация времени ответа</td>
+</tr>
+
+<tr>
+<td class="row-number">16</td>
+<td>15</td>
+<td>API</td>
+<td>Stability</td>
+<td class="percent">81%</td>
+<td class="ok">OK</td>
+<td>Сервис работает без деградации</td>
+</tr>
+
+<tr>
+<td class="row-number">17</td>
+<td>16</td>
+<td>E2E</td>
+<td>UI сценарии</td>
+<td class="percent">70%</td>
+<td class="mid">mid</td>
+<td>Покрытие пользовательских потоков среднее</td>
+</tr>
+
+<tr>
+<td class="row-number">18</td>
+<td>17</td>
+<td>E2E</td>
+<td>Smoke</td>
+<td class="percent">78%</td>
+<td class="mid">mid</td>
+<td>Базовые сценарии выполняются корректно</td>
+</tr>
+
+<tr>
+<td class="row-number">19</td>
+<td>18</td>
+<td>E2E</td>
+<td>Regression</td>
+<td class="percent">74%</td>
+<td class="mid">mid</td>
+<td>Есть сценарии на расширение</td>
+</tr>
+
+<tr>
+<td class="row-number">20</td>
+<td>19</td>
+<td>Load</td>
+<td>Нагрузка</td>
+<td class="percent">60%</td>
+<td class="dev">dev</td>
+<td>Тесты нагрузки находятся в разработке</td>
+</tr>
+
+<tr>
+<td class="row-number">21</td>
+<td>20</td>
+<td>Load</td>
+<td>Stress</td>
+<td class="percent">55%</td>
+<td class="dev">dev</td>
+<td>Пороговые значения ещё уточняются</td>
+</tr>
+
+<tr>
+<td class="row-number">22</td>
+<td>21</td>
+<td>CI/CD</td>
+<td>Lint check</td>
+<td class="percent">100%</td>
+<td class="ok">OK</td>
+<td>Код соответствует стилю и правилам</td>
+</tr>
+
+<tr>
+<td class="row-number">23</td>
+<td>22</td>
+<td>CI/CD</td>
+<td>Unit tests</td>
+<td class="percent">91%</td>
+<td class="ok">OK</td>
+<td>Автотесты запускаются успешно</td>
+</tr>
+
+<tr>
+<td class="row-number">24</td>
+<td>23</td>
+<td>CI/CD</td>
+<td>API validation</td>
+<td class="percent">89%</td>
+<td class="ok">OK</td>
+<td>Проверка API проходит стабильно</td>
+</tr>
+
+<tr>
+<td class="row-number">25</td>
+<td>24</td>
+<td>CI/CD</td>
+<td>Deploy release</td>
+<td class="percent">100%</td>
+<td class="ok">OK</td>
+<td>Релизный пайплайн завершён успешно</td>
+</tr>
+
+</tbody>
+</table>
+
+</div>
+
+<div class="statusbar">
+    <div class="tabs">
+        <div class="tab">Матрица тестов</div>
+        <div class="tab">Покрытие</div>
+        <div class="tab">CI/CD</div>
+    </div>
+
+    <div>
+        Готово
+    </div>
+</div>
+
+</body>
+</html>
